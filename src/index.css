@@ -2,13 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --page-bg: #fafaf9;
+  --page-bg-dark: #030712;
+  --surface-dark: #0e1726;
+  --grid: #808080;
+  --primary: #0d9488;
+  --accent: #f59e0b;
+  --info: #0369a1;
+  --purple: #8b5cf6;
+  --text-muted: #57534e;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply min-h-screen bg-[#fafaf9] text-stone-800 antialiased transition-colors duration-300 dark:bg-[#020617] dark:text-stone-100;
+    @apply min-h-screen bg-[color:var(--page-bg)] text-stone-800 antialiased transition-colors duration-300 dark:bg-[color:var(--page-bg-dark)] dark:text-stone-100;
     /* Add subtle radial ambient glows in dark mode */
     background-image: radial-gradient(circle at 10% 20%, rgba(20, 184, 166, 0.08) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
     background-attachment: fixed;

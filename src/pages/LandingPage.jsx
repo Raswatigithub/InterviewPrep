@@ -157,7 +157,7 @@ export default function LandingPage() {
   // const planner = getPlannerMetrics();
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#030712] font-sans text-stone-200">
+    <main className="min-h-screen overflow-hidden bg-[color:var(--page-bg-dark)] font-sans text-stone-200">
       
       {/* Decorative Radial Glows & Grid Mesh */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -166,7 +166,7 @@ export default function LandingPage() {
         <div className="absolute left-[20%] bottom-0 w-[60%] h-[60%] rounded-full bg-gradient-to-t from-teal-600/10 to-transparent blur-[160px]" />
         
         {/* Fine-grid mesh backdrop */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:28px_28px]" />
+        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,var(--grid)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid)_1px,transparent_1px)] bg-[size:28px_28px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
@@ -426,7 +426,7 @@ export default function LandingPage() {
                     </div>
 
                     <div className="flex flex-col rounded-2xl border border-white/10 bg-slate-900 shadow-2xl overflow-hidden min-h-[340px]">
-                      <div className="flex items-center justify-between bg-[#0e1726] px-4 py-2 text-xs border-b border-white/5 text-stone-400 font-mono">
+                      <div className="flex items-center justify-between bg-[color:var(--surface-dark)] px-4 py-2 text-xs border-b border-white/5 text-stone-400 font-mono">
                         <div className="flex items-center gap-2">
                           <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
                           <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
@@ -450,7 +450,7 @@ export default function LandingPage() {
                           </pre>
                         </div>
 
-                        <div className="bg-[#0e1726]/80 p-3 rounded-lg border border-teal-500/20 text-[11px] text-stone-300">
+                        <div className="bg-[color:var(--surface-dark)]/80 p-3 rounded-lg border border-teal-500/20 text-[11px] text-stone-300">
                           {sandboxGeneratorData[selectedStack].review}
                         </div>
                       </div>
@@ -642,7 +642,7 @@ export default function LandingPage() {
 
                       {/* Ready status badge *
                       <div className="text-center">
-                        <span className="inline-flex items-center gap-1.5 text-xs text-stone-300 font-bold bg-[#0e1726] border border-white/5 rounded-full px-4 py-1.5">
+                        <span className="inline-flex items-center gap-1.5 text-xs text-stone-300 font-bold bg-[color:var(--surface-dark)] border border-white/5 rounded-full px-4 py-1.5">
                           <Award className="h-4 w-4 text-emerald-400" />
                           {progressPercent === 100 
                             ? "Syllabus Perfected! You're ready." 

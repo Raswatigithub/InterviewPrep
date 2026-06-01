@@ -241,7 +241,7 @@ export default function WorkspaceSimulator() {
                 </div>
 
                 <div className="flex min-h-[340px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl">
-                  <div className="flex items-center justify-between border-b border-white/5 bg-[#0e1726] px-4 py-2 font-mono text-xs text-stone-400">
+                  <div className="flex items-center justify-between border-b border-white/5 bg-[color:var(--surface-dark)] px-4 py-2 font-mono text-xs text-stone-400">
                     <div className="flex items-center gap-2">
                       <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
                       <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
@@ -271,7 +271,7 @@ export default function WorkspaceSimulator() {
                       </pre>
                     </div>
 
-                    <div className="rounded-lg border border-teal-500/20 bg-[#0e1726]/80 p-3 text-[11px] text-stone-300">
+                    <div className="rounded-lg border border-teal-500/20 bg-[color:var(--surface-dark)]/80 p-3 text-[11px] text-stone-300">
                       {sandboxGeneratorData[selectedStack].review}
                     </div>
                   </div>
@@ -450,7 +450,7 @@ export default function WorkspaceSimulator() {
                     </div>
                   </div>
 
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/5 bg-[#0e1726] px-4 py-1.5 text-xs font-bold text-stone-300">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/5 bg-[color:var(--surface-dark)] px-4 py-1.5 text-xs font-bold text-stone-300">
                     <Award className="h-4 w-4 text-emerald-400" aria-hidden="true" />
                     {progressPercent === 100
                       ? "Syllabus Perfected! You're ready."
