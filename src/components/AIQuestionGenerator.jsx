@@ -4,6 +4,7 @@ import Button from './ui/Button';
 export default function AIQuestionGenerator({
   disabled,
   domain,
+  gemini,
   focusSummary,
   isLoading,
   onGenerate,
@@ -20,12 +21,12 @@ export default function AIQuestionGenerator({
       <Button
         aria-label={`Generate practice question for ${domain}`}
         className="w-full"
-        disabled={disabled}
+        disabled={disabled || gemini.isCoolingDown('question')}
         icon={Sparkles}
         isLoading={isLoading}
         onClick={onGenerate}
       >
-        Generate Practice Question
+        {isLoading ? 'Generating...' : gemini.getCooldownLabel('question', 'Generate Practice Question')}
       </Button>
       <p className="mt-4 rounded-lg border border-dashed border-stone-300 p-4 text-sm text-stone-500 dark:border-stone-700 dark:text-stone-400">
         Generated practice questions open in the Study Material Workspace.

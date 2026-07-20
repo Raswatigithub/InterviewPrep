@@ -25,6 +25,7 @@ const actions = [
 
 export default function CodeReviewPanel({
   code,
+  gemini,
   isLoading,
   onCodeChange,
   onCopy,
@@ -50,11 +51,14 @@ export default function CodeReviewPanel({
               aria-label={action.label}
               icon={action.icon}
               isLoading={isLoading(action.key)}
+              disabled={gemini.isCoolingDown(action.key)}
               key={action.key}
               onClick={() => onSubmit(action.key)}
               variant={action.variant}
             >
-              {action.label}
+              {isLoading(action.key)
+                ? 'Generating...'
+                : gemini.getCooldownLabel(action.key, action.label)}
             </Button>
           ))}
         </div>

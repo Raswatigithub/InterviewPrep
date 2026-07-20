@@ -4,6 +4,7 @@ import Button from './ui/Button';
 export default function StudyPlanner({
   days,
   hours,
+  gemini,
   isLoading,
   onDaysChange,
   onHoursChange,
@@ -39,8 +40,15 @@ export default function StudyPlanner({
           value={hours}
         />
       </div>
-      <Button className="w-full" icon={CalendarDays} isLoading={isLoading} onClick={onSubmit} variant="amber">
-        Generate Schedule
+      <Button
+        className="w-full"
+        icon={CalendarDays}
+        isLoading={isLoading}
+        onClick={onSubmit}
+        disabled={gemini.isCoolingDown('planner')}
+        variant="amber"
+      >
+        {isLoading ? 'Generating...' : gemini.getCooldownLabel('planner', 'Generate Schedule')}
       </Button>
       <p className="mt-4 rounded-lg border border-dashed border-amber-300 bg-amber-50/70 p-5 text-sm text-amber-800 dark:border-amber-900/70 dark:bg-amber-950/30 dark:text-amber-200">
         Your generated schedule opens in the Study Material Workspace, where you can review and

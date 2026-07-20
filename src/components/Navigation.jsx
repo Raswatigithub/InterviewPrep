@@ -5,12 +5,15 @@ import {
   // Compass,
   Focus,
   LayoutDashboard,
+  LogOut,
   PanelsTopLeft,
   Sparkles,
   House,
   // LayoutPanelTop,
 } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { usePrep } from '../context/usePrep';
+import { logoutUser } from '../services/authService';
 import { cn } from '../utils/cn';
 
 const navItems = [
@@ -86,6 +89,19 @@ function NavigationLink({ item, compact = false }) {
 }
 
 export default function Navigation() {
+  const navigate = useNavigate();
+  const { notify } = usePrep();
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      notify('You have been logged out.', 'success');
+      navigate('/auth', { replace: true });
+    } catch (error) {
+      notify(error.message || 'Unable to logout right now.', 'error');
+    }
+  };
+
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 border-r border-stone-200 bg-white/90 p-5 shadow-soft backdrop-blur-xl dark:border-white/5 dark:bg-slate-950/60 dark:shadow-2xl dark:backdrop-blur-2xl lg:block">
@@ -111,6 +127,15 @@ export default function Navigation() {
             <NavigationLink item={item} key={item.to} />
           ))}
         </nav>
+
+        <button
+          className="mt-6 inline-flex w-full items-center gap-3 rounded-lg border border-white/10 bg-slate-900/80 px-4 py-3 text-sm font-semibold text-stone-300 transition hover:bg-slate-800"
+          onClick={handleLogout}
+          type="button"
+        >
+          <LogOut className="h-4 w-4" />
+          Logout
+        </button>
 
         {/* <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-teal-100 bg-teal-50 p-4 dark:border-teal-500/25 dark:bg-teal-500/10">
           <p className="mb-2 flex items-center gap-2 text-sm font-bold text-teal-800 dark:text-teal-300">
@@ -138,6 +163,14 @@ export default function Navigation() {
             <NavigationLink compact item={item} key={item.to} />
           ))}
         </nav>
+        <button
+          className="mt-3 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-slate-900/80 px-3 py-2 text-xs font-semibold text-stone-300"
+          onClick={handleLogout}
+          type="button"
+        >
+          <LogOut className="h-3.5 w-3.5" />
+          Logout
+        </button>
       </div>
     </>
   );

@@ -35,6 +35,7 @@ export default function AIToolsPage() {
       content: (
         <CodeReviewPanel
           code={code}
+          gemini={gemini}
           isLoading={gemini.isLoading}
           onCodeChange={setCode}
           onCopy={copyGeneratedText}
@@ -49,6 +50,7 @@ export default function AIToolsPage() {
       content: (
         <ConceptDemystifier
           concept={concept}
+          gemini={gemini}
           isLoading={gemini.isLoading('eli5')}
           onConceptChange={setConcept}
           onCopy={copyGeneratedText}
@@ -64,6 +66,7 @@ export default function AIToolsPage() {
         <StudyPlanner
           days={plannerDays}
           hours={plannerHours}
+          gemini={gemini}
           isLoading={gemini.isLoading('planner')}
           onDaysChange={setPlannerDays}
           onHoursChange={setPlannerHours}

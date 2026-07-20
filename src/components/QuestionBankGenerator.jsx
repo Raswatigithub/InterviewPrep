@@ -5,6 +5,7 @@ import Card from './ui/Card';
 
 export default function QuestionBankGenerator({
   disabled,
+  gemini,
   focus,
   isLoading,
   onGenerate,
@@ -35,12 +36,12 @@ export default function QuestionBankGenerator({
           <Button
             aria-label="Generate interview question bank"
             className="md:min-w-[260px]"
-            disabled={disabled}
+            disabled={disabled || gemini.isCoolingDown('question-bank')}
             icon={Sparkles}
             isLoading={isLoading}
             onClick={onGenerate}
           >
-            Generate Question Bank
+            {isLoading ? 'Generating...' : gemini.getCooldownLabel('question-bank', 'Generate Question Bank')}
           </Button>
         </div>
 

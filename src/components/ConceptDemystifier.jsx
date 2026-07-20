@@ -4,6 +4,7 @@ import CopyButton from './ui/CopyButton';
 
 export default function ConceptDemystifier({
   concept,
+  gemini,
   isLoading,
   onConceptChange,
   onCopy,
@@ -28,9 +29,15 @@ export default function ConceptDemystifier({
           type="text"
           value={concept}
         />
-        <Button icon={WandSparkles} isLoading={isLoading} onClick={onSubmit} variant="indigo">
-          Explain Like I am 5
-        </Button>
+      <Button
+        icon={WandSparkles}
+        disabled={gemini.isCoolingDown('eli5')}
+        isLoading={isLoading}
+        onClick={onSubmit}
+        variant="indigo"
+      >
+        {isLoading ? 'Generating...' : gemini.getCooldownLabel('eli5', 'Explain Like I am 5')}
+      </Button>
         {output ? (
           <div className="space-y-3">
             <div className="flex justify-end">

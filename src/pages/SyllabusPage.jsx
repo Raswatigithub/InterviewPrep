@@ -39,6 +39,7 @@ export default function SyllabusPage() {
           <AIQuestionGenerator
             disabled={gemini.loadingKey !== null}
             domain={selectedDomain}
+            gemini={gemini}
             focusSummary={studyFocusSummary}
             isLoading={gemini.isLoading('question')}
             onGenerate={handleGenerateQuestion}

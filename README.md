@@ -9,7 +9,7 @@ A production-ready React + Vite conversion of the original single-file exam prep
 - Tailwind CSS
 - Chart.js + react-chartjs-2
 - Framer Motion
-- Gemini API via `VITE_GEMINI_API_KEY`
+- Backend AI proxy via `VITE_API_BASE_URL`
 
 ## Setup
 
@@ -22,8 +22,7 @@ npm run dev
 Add your Gemini API key to `.env`:
 
 ```bash
-VITE_GEMINI_API_KEY=your_api_key_here
-VITE_GEMINI_MODEL=gemini-2.5-flash
+VITE_API_BASE_URL=https://interviewprep-backend-etik.onrender.com
 ```
 
 The visual hero is built natively with React, Tailwind, and Framer Motion. No Spline key or embed is required.
@@ -31,7 +30,7 @@ The visual hero is built natively with React, Tailwind, and Framer Motion. No Sp
 For stronger reasoning, you can switch the model to:
 
 ```bash
-VITE_GEMINI_MODEL=gemini-2.5-pro
+VITE_API_BASE_URL=https://your-backend-service.onrender.com
 ```
 
 `gemini-2.5-flash` is better for speed and cost. `gemini-2.5-pro` is better for deeper reasoning, but it is typically slower and more expensive.
@@ -108,8 +107,7 @@ src/
 
 For the GitHub Pages workflow in [.github/workflows/deploy.yml](/C:/Users/admin/Documents/Practics-website/.github/workflows/deploy.yml), add:
 
-- Repository secret: `VITE_GEMINI_API_KEY`
-- Repository variable: `VITE_GEMINI_MODEL`
+- Repository variable: `VITE_API_BASE_URL`
   Example: `gemini-2.5-flash` or `gemini-2.5-pro`
 
 Important:

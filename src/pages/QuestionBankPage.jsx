@@ -7,6 +7,7 @@ export default function QuestionBankPage() {
   return (
     <QuestionBankGenerator
       disabled={gemini.loadingKey !== null}
+      gemini={gemini}
       focus={studyFocus}
       isLoading={gemini.isLoading('question-bank')}
       onGenerate={handleGenerateQuestionBank}
