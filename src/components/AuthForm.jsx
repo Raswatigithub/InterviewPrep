@@ -31,13 +31,13 @@ export default function AuthForm({ loading, onSubmit, onModeChange, mode = 'logi
   };
 
   return (
-    <Card className="mx-auto w-full max-w-xl border border-white/10 bg-slate-950/70 p-8 shadow-2xl shadow-black/30 backdrop-blur-xl">
-      <div className="mb-8 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-500/20 text-teal-300">
+    <Card className="mx-auto w-full max-w-xl border border-white/10 bg-slate-950/70 p-5 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-8">
+      <div className="mb-8 flex items-start gap-3 sm:items-center">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-teal-500/20 text-teal-300 sm:h-12 sm:w-12">
           <UserCircle2 className="h-6 w-6" />
         </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-teal-300">Authentication</p>
+        <div className="min-w-0">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300 sm:tracking-[0.3em]">Authentication</p>
           <h2 className="text-2xl font-black text-white">{heading}</h2>
         </div>
       </div>
@@ -119,14 +119,14 @@ export default function AuthForm({ loading, onSubmit, onModeChange, mode = 'logi
         </Button>
       </form> */}
 
-<form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={handleSubmit}>
         {mode === 'register' && (
           <label className="block">
             <span className="mb-2 block text-sm font-semibold text-stone-300">Full name</span>
-            <div className="flex items-center rounded-xl border border-white/10 bg-slate-900/80 px-4 py-3 transition-colors focus-within:border-teal-400/50">
-              <UserCircle2 className="mr-3 h-4 w-4 text-stone-500" />
+            <div className="flex items-center rounded-xl border border-white/10 bg-slate-900/80 px-3 py-3 transition-colors focus-within:border-teal-400/50 sm:px-4">
+              <UserCircle2 className="mr-3 h-4 w-4 shrink-0 text-stone-500" />
               <input
-                className="w-full bg-transparent text-sm text-white outline-none placeholder:text-stone-500"
+                className="min-w-0 w-full bg-transparent text-sm text-white outline-none placeholder:text-stone-500"
                 name="name"
                 onChange={handleChange}
                 placeholder="John Doe"
@@ -140,10 +140,10 @@ export default function AuthForm({ loading, onSubmit, onModeChange, mode = 'logi
 
         <label className="block">
           <span className="mb-2 block text-sm font-semibold text-stone-300">Email</span>
-          <div className="flex items-center rounded-xl border border-white/10 bg-slate-900/80 px-4 py-3 transition-colors focus-within:border-teal-400/50">
-            <Mail className="mr-3 h-4 w-4 text-stone-500" />
+          <div className="flex items-center rounded-xl border border-white/10 bg-slate-900/80 px-3 py-3 transition-colors focus-within:border-teal-400/50 sm:px-4">
+            <Mail className="mr-3 h-4 w-4 shrink-0 text-stone-500" />
             <input
-              className="w-full bg-transparent text-sm text-white outline-none placeholder:text-stone-500"
+              className="min-w-0 w-full bg-transparent text-sm text-white outline-none placeholder:text-stone-500"
               name="email"
               onChange={handleChange}
               placeholder="john@example.com"
@@ -156,10 +156,10 @@ export default function AuthForm({ loading, onSubmit, onModeChange, mode = 'logi
 
         <label className="block">
           <span className="mb-2 block text-sm font-semibold text-stone-300">Password</span>
-          <div className="flex items-center rounded-xl border border-white/10 bg-slate-900/80 px-4 py-3 transition-colors focus-within:border-teal-400/50">
-            <Lock className="mr-3 h-4 w-4 text-stone-500" />
+          <div className="flex items-center rounded-xl border border-white/10 bg-slate-900/80 px-3 py-3 transition-colors focus-within:border-teal-400/50 sm:px-4">
+            <Lock className="mr-3 h-4 w-4 shrink-0 text-stone-500" />
             <input
-              className="w-full bg-transparent text-sm text-white outline-none placeholder:text-stone-500"
+              className="min-w-0 w-full bg-transparent text-sm text-white outline-none placeholder:text-stone-500"
               name="password"
               onChange={handleChange}
               placeholder="Enter your password"
@@ -168,7 +168,7 @@ export default function AuthForm({ loading, onSubmit, onModeChange, mode = 'logi
               value={form.password}
             />
             <button
-              className="ml-2 text-xs font-semibold text-teal-400 hover:text-teal-300 transition-colors"
+              className="ml-2 shrink-0 text-xs font-semibold text-teal-400 transition-colors hover:text-teal-300"
               onClick={() => setShowPassword((prev) => !prev)}
               type="button"
             >
@@ -181,11 +181,11 @@ export default function AuthForm({ loading, onSubmit, onModeChange, mode = 'logi
           {mode === 'login' ? 'Sign in' : 'Create account'}
         </Button>
       </form>
-      <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-5 text-sm text-stone-400">
+      <div className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-5 text-sm text-stone-400 sm:flex-row sm:items-center sm:justify-between">
         <span>
           {mode === 'login' ? "Don't have an account?" : 'Already registered?'}
         </span>
-        <button className="font-semibold text-teal-300" onClick={() => onModeChange(mode === 'login' ? 'register' : 'login')} type="button">
+        <button className="text-left font-semibold text-teal-300 sm:text-right" onClick={() => onModeChange(mode === 'login' ? 'register' : 'login')} type="button">
           {mode === 'login' ? 'Create one' : 'Sign in instead'}
         </button>
       </div>

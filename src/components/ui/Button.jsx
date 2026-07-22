@@ -24,7 +24,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        'inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-bold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60',
+        'inline-flex min-h-12 max-w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-bold leading-snug transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60',
         variants[variant],
         className,
       )}
@@ -33,7 +33,7 @@ export default function Button({
       {...props}
     >
       {Icon && !isLoading ? <Icon className="h-4 w-4" aria-hidden="true" /> : null}
-      {children}
+      <span className="min-w-0 break-words">{children}</span>
       {isLoading ? <LoadingSpinner /> : null}
     </button>
   );

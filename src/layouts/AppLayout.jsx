@@ -13,7 +13,7 @@ export default function AppLayout() {
   return (
     <>
       <Navigation />
-      <div className="lg:pl-72" id="top">
+      <div className="min-w-0 lg:pl-72" id="top">
         {/* <Header
           darkMode={darkMode}
           onToggleDarkMode={() => setDarkMode((value) => !value)}
@@ -21,7 +21,7 @@ export default function AppLayout() {
           totalCount={logisticsData.length}
         /> */}
         {/* <SplineShowcase /> */}
-        <main className="mx-auto mt-8 max-w-6xl px-4 pb-12">
+        <main className="mx-auto mt-5 w-full max-w-6xl px-3 pb-10 sm:mt-8 sm:px-4 sm:pb-12 lg:px-6">
           <Outlet />
         </main>
       </div>

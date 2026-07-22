@@ -67,7 +67,7 @@ function NavigationLink({ item, compact = false }) {
       className={({ isActive }) =>
         cn(
           'group inline-flex items-center gap-3 rounded-lg text-sm font-bold text-stone-600 transition hover:bg-teal-50 hover:text-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:text-stone-400 dark:hover:bg-white/5 dark:hover:text-teal-300',
-          compact ? 'min-w-max px-3 py-2' : 'w-full px-4 py-3',
+          compact ? 'shrink-0 px-3 py-2 text-xs sm:text-sm' : 'w-full px-4 py-3',
           isActive && 'bg-teal-50 text-teal-700 dark:bg-teal-500/10 dark:text-teal-300 dark:border-l-[3px] dark:border-teal-500 dark:rounded-l-none',
         )
       }
@@ -81,7 +81,7 @@ function NavigationLink({ item, compact = false }) {
           )}>
             <Icon className="h-4 w-4" aria-hidden="true" />
           </span>
-          {item.label}
+          <span className="whitespace-nowrap">{item.label}</span>
         </>
       )}
     </NavLink>
@@ -157,14 +157,14 @@ export default function Navigation() {
         </div>
         <nav
           aria-label="Primary navigation"
-          className="flex gap-2 overflow-x-auto pb-1"
+          className="-mx-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {navItems.map((item) => (
             <NavigationLink compact item={item} key={item.to} />
           ))}
         </nav>
         <button
-          className="mt-3 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-slate-900/80 px-3 py-2 text-xs font-semibold text-stone-300"
+          className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-slate-900/80 px-3 py-2 text-xs font-semibold text-stone-300 sm:w-auto"
           onClick={handleLogout}
           type="button"
         >

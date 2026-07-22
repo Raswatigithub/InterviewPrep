@@ -23,19 +23,19 @@ export default function QuestionBankGenerator({
         </p>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
+          <div className="min-w-0">
             <p className="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
               Generator Focus
             </p>
-            <p className="mt-1 text-lg font-bold text-stone-800 dark:text-stone-100">
+            <p className="mt-1 break-words text-lg font-bold text-stone-800 dark:text-stone-100">
               {formatStudyFocus(focus)}
             </p>
           </div>
           <Button
             aria-label="Generate interview question bank"
-            className="md:min-w-[260px]"
+            className="w-full md:min-w-[260px] md:w-auto"
             disabled={disabled || gemini.isCoolingDown('question-bank')}
             icon={Sparkles}
             isLoading={isLoading}

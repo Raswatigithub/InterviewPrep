@@ -17,7 +17,7 @@ export default function Toast({ message, type = 'info', onDismiss }) {
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           className={cn(
-            'fixed right-4 top-4 z-50 flex max-w-sm items-start gap-3 rounded-lg border bg-white p-4 text-sm shadow-soft dark:bg-stone-900',
+            'fixed left-3 right-3 top-3 z-50 flex max-w-sm items-start gap-3 rounded-lg border bg-white p-4 text-sm shadow-soft dark:bg-stone-900 sm:left-auto sm:right-4 sm:top-4',
             type === 'error' && 'border-rose-200 text-rose-800 dark:border-rose-900 dark:text-rose-100',
             type === 'success' && 'border-teal-200 text-teal-800 dark:border-teal-900 dark:text-teal-100',
             type === 'info' && 'border-stone-200 text-stone-800 dark:border-stone-700 dark:text-stone-100',

@@ -53,7 +53,7 @@ export default function SubjectSelector({ focus, onChange, onReset }) {
         </p>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {fields.map((field) => (
             <label className="block" htmlFor={field.id} key={field.id}>
@@ -82,18 +82,18 @@ export default function SubjectSelector({ focus, onChange, onReset }) {
           initial={{ opacity: 0, y: 6 }}
           key={focusSummary}
         >
-          <div>
+          <div className="min-w-0">
             <p className="mb-1 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
               <BookOpenCheck className="h-4 w-4" aria-hidden="true" />
               Current Focus
             </p>
-            <p className="text-base font-bold text-stone-800 dark:text-stone-100">
+            <p className="break-words text-base font-bold text-stone-800 dark:text-stone-100">
               {focusSummary}
             </p>
           </div>
           <Button
             aria-label="Reset study focus"
-            className="md:w-auto"
+            className="w-full md:w-auto"
             icon={RotateCcw}
             onClick={() => onReset(defaultStudyFocus)}
             variant="stone"

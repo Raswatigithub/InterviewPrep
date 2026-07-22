@@ -139,11 +139,11 @@ export default function AuthPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[color:var(--page-bg-dark)] px-4 py-10 text-stone-200">
-      <div className="mx-auto flex max-w-5xl flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
+    <main className="min-h-screen bg-[color:var(--page-bg-dark)] px-3 py-8 text-stone-200 sm:px-4 sm:py-10">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         {/* Left Column – Brand, tagline, key benefits */}
-        <section className="max-w-xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm font-medium text-teal-300">
+        <section className="w-full max-w-xl">
+          <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm font-medium text-teal-300">
             <span className="text-lg">🎯</span> InterviewPrep
           </div>
           <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
@@ -167,7 +167,7 @@ export default function AuthPage() {
         </section>
 
         {/* Right Column – Auth Form */}
-        <div className="w-full max-w-sm">
+        <div className="w-full max-w-xl lg:max-w-sm">
           <AuthForm
             error={error}
             loading={loading}
