@@ -1,11 +1,11 @@
 // import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import BrandLogo from '../components/BrandLogo';
 import { motion,
   //  AnimatePresence 
   } from 'framer-motion';
 import { 
   ArrowRight, 
-  BookOpenCheck, 
   Sparkles, 
   Target, 
   TimerReset, 
@@ -124,15 +124,7 @@ export default function LandingPage() {
         {/* HEADER */}
         <header className="flex items-center justify-between border-b border-white/5 bg-slate-950/40 backdrop-blur-md rounded-2xl px-6 py-4 mt-2">
           <Link className="inline-flex items-center gap-3" to="/study-focus">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500 text-slate-950 shadow-lg shadow-teal-500/25 transition-transform hover:scale-105">
-              <BookOpenCheck className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <span>
-              <span className="block text-xs font-bold uppercase tracking-[0.2em] text-teal-300">
-                Interview Prep AI
-              </span>
-              <span className="block text-xs text-stone-400">Exam Command Center</span>
-            </span>
+            <BrandLogo subtitle="Exam Command Center" />
           </Link>
 
           <div className="flex items-center gap-4">
@@ -313,10 +305,7 @@ export default function LandingPage() {
             
             <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
               <Link className="inline-flex items-center gap-3" to="/">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-500 text-slate-950">
-                  <BookOpenCheck className="h-4.5 w-4.5" />
-                </span>
-                <span className="text-sm font-bold uppercase tracking-wider text-teal-300">Interview Prep AI</span>
+                <BrandLogo size="sm" />
               </Link>
               <p className="text-[11px] text-stone-500 leading-relaxed">
                 Premium full-stack software engineer training portal. Fully dynamic, time-aware preparation with absolute syllabus focus.

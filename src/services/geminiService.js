@@ -1,18 +1,29 @@
-import { requestJson } from './apiClient';
-import { getApiBaseUrl } from './apiClient';
+import { getApiBaseUrl, requestJson } from './apiClient';
+import { getStoredAuthSession } from './authService';
 
 export async function callGemini({
   prompt,
-  systemPrompt = 'You are a senior technical interviewer.',
-  retries = 3,
+  systemPrompt,
+  retries = 5,
 }) {
+  const session = getStoredAuthSession();
+  const headers = {};
+  if (session?.token) {
+    headers.Authorization = `Bearer ${session.token}`;
+  }
+
+  // Merge role/systemPrompt directly into prompt to prevent backend systemInstruction token limits
+  const fullPrompt = systemPrompt
+    ? `Role/Instructions: ${systemPrompt}\n\nTask:\n${prompt}`
+    : prompt;
+
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     try {
       const response = await requestJson('/api/ai/generate', {
         method: 'POST',
+        headers,
         body: {
-          prompt,
-          systemPrompt,
+          prompt: fullPrompt,
         },
         timeoutMs: 30000,
       });

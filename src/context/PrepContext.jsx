@@ -72,9 +72,9 @@ export function PrepProvider({ children }) {
     }
   };
 
-  const runGemini = async ({ key, prompt, systemPrompt, onSuccess }) => {
+  const runGemini = async ({ key, prompt, systemPrompt, forceRefresh = false, onSuccess }) => {
     try {
-      const result = await gemini.generate({ key, prompt, systemPrompt });
+      const result = await gemini.generate({ key, prompt, systemPrompt, forceRefresh });
       onSuccess(result);
       notify('AI response generated.', 'success');
     } catch (error) {
@@ -82,7 +82,8 @@ export function PrepProvider({ children }) {
     }
   };
 
-  const handleGenerateQuestion = () => {
+  const handleGenerateQuestion = (options = {}) => {
+    const { forceRefresh = false } = options || {};
     if (!selectedDomain) {
       notify('Select a syllabus domain first.', 'error');
       return;
@@ -92,6 +93,7 @@ export function PrepProvider({ children }) {
     setQuestionOutput('');
     runGemini({
       key: 'question',
+      forceRefresh,
       prompt: `Generate one polished interview-preparation item for a Full-Stack developer.
 
 Syllabus domain: ${selectedDomain}
@@ -112,31 +114,31 @@ Keep it practical, concise, and interview-specific. Do not give generic advice.`
     });
   };
 
-  const handleGenerateQuestionBank = () => {
+  const handleGenerateQuestionBank = (options = {}) => {
+    const { forceRefresh = false } = options || {};
     navigate('/materials?tab=question-bank');
     setQuestionBankOutput('');
     runGemini({
       key: 'question-bank',
+      forceRefresh,
       prompt: `Generate a targeted interview question bank for this study focus:
 
 ${studyFocusSummary}
 
-Create 8 realistic interview questions an interviewer might ask for this exact preparation path.
+Create 8 targeted, high-yield interview questions for this exact stack and difficulty.
 
-For each item, include these sections in order:
-1. Question
-2. Why it gets asked
-3. Expected answer points
-4. Difficulty level
-5. Tags
-6. Follow-up question
-7. Suggested practice task
+Format each question neatly as follows:
+### Question [N]: [Title]
+**Question**: [Detailed question text]
+**Why Ask This**: [Brief explanation]
+**Key Answer Points**:
+- [Point 1]
+- [Point 2]
+- [Point 3]
+**Common Pitfall**: [Main mistake to avoid]
+**Follow-Up**: [Related follow-up question]
 
-Constraints:
-- Keep the questions specific to the selected language, frameworks, and topic
-- Blend conceptual and practical interview scenarios when appropriate
-- Avoid repeating the same question pattern
-- Write in a polished, study-friendly format with strong spacing between questions`,
+Keep answers focused and bulleted so all 8 questions fit clearly into the response.`,
       systemPrompt:
         'You are a senior technical interviewer creating practical interview preparation material for software developers.',
       onSuccess: setQuestionBankOutput,

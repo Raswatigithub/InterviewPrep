@@ -1,38 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { callGemini } from '../services/geminiService';
 
 const CACHE_STORAGE_KEY = 'exam-prep-gemini-cache-v1';
 const DEFAULT_COOLDOWN_SECONDS = 45;
-const MAX_CACHE_ENTRIES = 20;
-
-function hashString(value) {
-  let hash = 5381;
-
-  for (let index = 0; index < value.length; index += 1) {
-    hash = (hash * 33) ^ value.charCodeAt(index);
-  }
-
-  return `g${Math.abs(hash >>> 0).toString(36)}`;
-}
-
-function loadCache() {
-  try {
-    const raw = window.localStorage.getItem(CACHE_STORAGE_KEY);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw);
-    return parsed && typeof parsed === 'object' ? parsed : {};
-  } catch {
-    return {};
-  }
-}
-
-function persistCache(cache) {
-  try {
-    window.localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(cache));
-  } catch {
-    // Ignore cache persistence failures.
-  }
-}
 
 function extractRetrySeconds(error) {
   const message = error?.payload?.message || error?.message || '';
@@ -52,29 +22,20 @@ function extractRetrySeconds(error) {
   return 0;
 }
 
-function trimCache(cache) {
-  const entries = Object.entries(cache);
-  if (entries.length <= MAX_CACHE_ENTRIES) {
-    return cache;
-  }
-
-  return Object.fromEntries(
-    entries
-      .sort((left, right) => (left[1]?.createdAt || 0) - (right[1]?.createdAt || 0))
-      .slice(entries.length - MAX_CACHE_ENTRIES),
-  );
-}
-
 export function useGemini() {
   const [loadingKey, setLoadingKey] = useState(null);
   const [error, setError] = useState('');
   const [cooldowns, setCooldowns] = useState({});
   const [tick, setTick] = useState(Date.now());
-  const cacheRef = useRef(null);
 
-  if (cacheRef.current === null) {
-    cacheRef.current = typeof window === 'undefined' ? {} : loadCache();
-  }
+  // Purge any stale client-side cache from localStorage so all AI responses are served by backend
+  useEffect(() => {
+    try {
+      window.localStorage.removeItem(CACHE_STORAGE_KEY);
+    } catch {
+      // Ignore storage cleanup failures
+    }
+  }, []);
 
   useEffect(() => {
     const hasActiveCooldown = Object.values(cooldowns).some((endsAt) => endsAt > Date.now());
@@ -87,42 +48,22 @@ export function useGemini() {
     return () => window.clearInterval(intervalId);
   }, [cooldowns]);
 
-  const getCacheKey = useCallback(
-    ({ key, prompt, systemPrompt }) => hashString(`${key}::${systemPrompt}::${prompt}`),
-    [],
-  );
-
-  const storeCache = useCallback((cacheKey, value) => {
-    const nextCache = trimCache({
-      ...(cacheRef.current || {}),
-      [cacheKey]: {
-        createdAt: Date.now(),
-        value,
-      },
-    });
-
-    cacheRef.current = nextCache;
-    persistCache(nextCache);
+  const clearCache = useCallback(() => {
+    try {
+      window.localStorage.removeItem(CACHE_STORAGE_KEY);
+    } catch {
+      // Ignore cache clearing errors.
+    }
   }, []);
-
-  const getCachedValue = useCallback((cacheKey) => cacheRef.current?.[cacheKey]?.value || '', []);
 
   const generate = useCallback(
     async ({ key, prompt, systemPrompt }) => {
-      const cacheKey = getCacheKey({ key, prompt, systemPrompt });
-      const cachedValue = getCachedValue(cacheKey);
-
-      if (cachedValue) {
-        setError('');
-        return cachedValue;
-      }
-
       setLoadingKey(key);
       setError('');
 
       try {
+        // Fetch fresh result directly from interviewprep-backend
         const result = await callGemini({ prompt, systemPrompt });
-        storeCache(cacheKey, result);
         return result;
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Unable to reach the AI tutor.';
@@ -145,7 +86,7 @@ export function useGemini() {
         setLoadingKey(null);
       }
     },
-    [getCacheKey, getCachedValue, storeCache],
+    [],
   );
 
   const clearError = useCallback(() => setError(''), []);
@@ -173,6 +114,7 @@ export function useGemini() {
   );
 
   return {
+    clearCache,
     clearError,
     error,
     generate,

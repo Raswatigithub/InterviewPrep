@@ -4,7 +4,6 @@ import {
   ClipboardList,
   // Compass,
   Focus,
-  LayoutDashboard,
   LogOut,
   PanelsTopLeft,
   Sparkles,
@@ -15,6 +14,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { usePrep } from '../context/usePrep';
 import { logoutUser } from '../services/authService';
 import { cn } from '../utils/cn';
+import BrandLogo from './BrandLogo';
 
 const navItems = [
   {
@@ -109,17 +109,7 @@ export default function Navigation() {
           className="mb-8 flex items-center gap-3 rounded-xl p-2 transition hover:bg-stone-100 dark:hover:bg-white/5"
           to="/"
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-stone-950 text-teal-300 dark:bg-teal-500 dark:text-slate-950 shadow-md">
-            <LayoutDashboard className="h-5 w-5" aria-hidden="true" />
-          </span>
-          <span>
-            <span className="block text-sm font-black uppercase tracking-wide text-stone-900 dark:text-white">
-              Interview Prep AI
-            </span>
-            <span className="block text-xs font-medium text-stone-500 dark:text-stone-400">
-              Study command center
-            </span>
-          </span>
+          <BrandLogo subtitle="Study command center" />
         </NavLink>
 
         <nav aria-label="Primary navigation" className="space-y-2">
@@ -150,10 +140,7 @@ export default function Navigation() {
 
       <div className="sticky top-0 z-40 border-b border-stone-200 bg-white/90 px-3 py-3 backdrop-blur-xl dark:border-white/5 dark:bg-slate-950/60 lg:hidden">
         <div className="mb-3 flex items-center gap-2 px-1">
-          <LayoutDashboard className="h-5 w-5 text-teal-600 dark:text-teal-400" aria-hidden="true" />
-          <span className="text-sm font-black uppercase tracking-wide text-stone-900 dark:text-white">
-            Interview Prep AI
-          </span>
+          <BrandLogo size="sm" />
         </div>
         <nav
           aria-label="Primary navigation"

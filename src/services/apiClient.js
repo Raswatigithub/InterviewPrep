@@ -1,5 +1,6 @@
 const DEFAULT_TIMEOUT_MS = 30000;
-const DEFAULT_BASE_URL = 'https://interviewprep-backend-etik.onrender.com';
+// const DEFAULT_BASE_URL = 'https://interviewprep-backend-etik.onrender.com';
+const DEFAULT_BASE_URL = 'http://localhost:5000';
 
 function getBaseUrl() {
   return (import.meta.env.VITE_API_BASE_URL || DEFAULT_BASE_URL).replace(/\/$/, '');

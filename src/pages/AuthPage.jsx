@@ -87,8 +87,10 @@
 
 
 import { useEffect, useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
+import BrandLogo from '../components/BrandLogo';
 import { usePrep } from '../context/usePrep';
 import { getCurrentUser, loginUser, registerUser } from '../services/authService';
 
@@ -138,13 +140,34 @@ export default function AuthPage() {
     }
   };
 
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+
+    navigate('/');
+  };
+
   return (
     <main className="min-h-screen bg-[color:var(--page-bg-dark)] px-3 py-8 text-stone-200 sm:px-4 sm:py-10">
+      <div className="mx-auto mb-8 flex w-full max-w-5xl items-center justify-between gap-4">
+        <BrandLogo size="lg" />
+        <button
+          className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 text-sm font-semibold text-stone-200 transition hover:border-teal-400/40 hover:bg-teal-500/10 hover:text-teal-200 sm:px-4"
+          onClick={handleBack}
+          type="button"
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+          <span>Back</span>
+        </button>
+      </div>
+
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         {/* Left Column – Brand, tagline, key benefits */}
         <section className="w-full max-w-xl">
           <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm font-medium text-teal-300">
-            <span className="text-lg">🎯</span> InterviewPrep
+            <BrandLogo size="sm" subtitle="Secure workspace access" />
           </div>
           <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
             Prepare for your next tech interview with confidence.
